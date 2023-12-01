@@ -44,7 +44,7 @@ export default function PatientList() {
   const filterData = debounce((value) => {
     const [min, max] = value;
     const newData = originalData.filter((item) => {
-        return item.age > min && item.age < max;
+        return item.age >= min && item.age <= max;
       });
       setFilteredData(newData);
   })
