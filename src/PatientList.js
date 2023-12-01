@@ -33,7 +33,7 @@ function valuetext(value) {
 
 export default function PatientList() {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState([0, 100]);
+  const [value, setValue] = useState([1, 100]);
   const [currentId, setCurrentId] = useState(null);
   const [originalData, setOriginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -43,10 +43,15 @@ export default function PatientList() {
 
   const filterData = debounce((value) => {
     const [min, max] = value;
-    const newData = originalData.filter((item) => {
-        return item.age >= min && item.age <= max;
-      });
-      setFilteredData(newData);
+    if(min === 1 && max === 100) {
+        setFilteredData(originalData);
+    } else{
+        const newData = originalData.filter((item) => {
+            return item.age >= min && item.age <= max;
+        });
+        setFilteredData(newData);
+    }
+
   })
 
   const handleChange = (event, newValue) => {
